@@ -1,0 +1,45 @@
+<?xml version="1.0" ?>
+<launch>
+
+	<arg name="pos1_x" default="0.5" />
+	<arg name="pos1_y" default="0.0" />
+	<arg name="pos1_z" default="0.0" />
+	<arg name="pos2_x" default="1." />
+	<arg name="pos2_y" default="0.0" />
+	<arg name="pos2_z" default="0.0" />
+       
+  	<include file="$(find brick_description)/launch/upload.launch"/>
+
+     	<!-- 2 launch gzserver (with empty world)/ gzcclient: Starts Gazebo and load the empty world if requested to do so - -->
+        <include file="$(find gazebo_ros)/launch/empty_world.launch" >
+                <arg name="paused" default="false" />
+                <arg name="use_sim_time" default="true" />
+                <arg name="gui" value="true" />
+                <arg name="headless" default="false" />
+                <arg name="debug" default="false" />
+                <arg name="verbose" value="true" />
+        </include>
+
+        <node name="spawn_gazebo_model1" pkg="gazebo_ros" type="spawn_model" args="-urdf -param brick1_description -model brick1 -x $(arg pos1_x) -y $(arg pos2_y) -z $(arg pos2_z)"/>
+	<node name="spawn_gazebo_model2" pkg="gazebo_ros" type="spawn_model" args="-urdf -param brick2_description -model brick2 -x $(arg pos2_x) -y $(arg pos2_y) -z $(arg pos2_z)"/>
+	
+
+	<!-- I need to do this here because there is no world link already to refer-->	
+	<node pkg="tf" type="static_transform_publisher" name="brick1_tf_broadcaster" args="-$(arg pos1_x)  -$(arg pos1_y) -$(arg pos1_z)  0 0 0    /brick1 /world   1000"/>
+	<!-- If you use together with ur5 comment the previous line  and decomment the next-->
+	<!--<node pkg="tf" type="static_transform_publisher" name="brick1_tf_broadcaster" args="$(arg pos1_x)  $(arg pos1_y) $(arg pos1_z)  0 0 0   /brick1 /world 1000"/>-->
+
+	
+	<node pkg="tf" type="static_transform_publisher" name="brick2_tf_broadcaster" args="$(arg pos2_x)  $(arg pos2_y) $(arg pos2_z)  0 0 0   /world  /brick2 1000"/>-->
+	   
+
+	<arg name="rviz_conf" default="$(find brick_description)/rviz/conf.rviz"/>
+	
+	<!-- run rviz -->
+	<node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rviz_conf) -f world"/>
+
+
+
+
+</launch>
+

@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+<launch>
+ 
+        <!-- send hyq urdf to param server -->
+        <param name="brick1_description" command="$(find xacro)/xacro --inorder '$(find brick_description)/urdf/brick1.xacro'"/>
+
+
+         
+        <!-- send hyq urdf to param server -->
+        <param name="brick2_description" command="$(find xacro)/xacro --inorder '$(find brick_description)/urdf/brick2.xacro'"/>
+  
+
+        <!-- send hyq urdf to param server -->
+        <param name="brick3_description" command="$(find xacro)/xacro --inorder '$(find brick_description)/urdf/brick3.xacro'"/>
+  
+
+        <!-- send hyq urdf to param server -->
+        <param name="brick4_description" command="$(find xacro)/xacro --inorder '$(find brick_description)/urdf/brick4.xacro'"/>
+  
+
+
+</launch>
+
