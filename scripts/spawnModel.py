@@ -31,7 +31,7 @@ if __name__ == '__main__':
     
     broadcaster1 = tf.TransformBroadcaster()    
     broadcaster2 = tf.TransformBroadcaster()    
-    spawnModel('brick3', np.array([1.5, 0.,0.]), broadcaster1)
-    spawnModel('brick4', np.array([2.0, 0.,0.]), broadcaster2)
+    spawnModel('X1-Y3-Z2', np.array([1.5, 0.,0.]), broadcaster1)
+    spawnModel('X2-Y2-Z2', np.array([2.0, 0.,0.]), broadcaster2)
     
     spin()
